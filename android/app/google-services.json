@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "214863180986",
+    "firebase_url": "https://vyaparexpress-37784.firebaseio.com",
+    "project_id": "vyaparexpress-37784",
+    "storage_bucket": "vyaparexpress-37784.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214863180986:android:b8b4716484de9702677e83",
+        "android_client_info": {
+          "package_name": "com.foodindia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214863180986-5nrulpp25ugos8sqmdjpp2rf97ml9j8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT7rGmkH_jboJwLY5n0cwJ5mjMxBIHNhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214863180986-5nrulpp25ugos8sqmdjpp2rf97ml9j8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
