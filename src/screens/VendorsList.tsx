@@ -1,9 +1,6 @@
 /* TODO:
- *   1.copy screen from template(DONE)
- *   2.modify according to typescript(DONE)
- *   3.add/remove features to complete the screen(DONE)
- *   4.Filter - Sort by Popularity, Sort by average rating, sort by latest, sort by price:low to high, sort by price:high to low(DONE)
- *   5.Pagination - show more at bottom(DONE)
+ * List of vendors
+ * - VendorCard
  * */
 
 import {
@@ -24,7 +21,6 @@ import React, {
   useState,
 } from 'react';
 
-import CartService from '../Services/CartService';
 import Product from '../common/Product';
 import Select from '../common/Select';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
@@ -35,7 +31,6 @@ import materialTheme from '../constants/Theme';
 const {width, height} = Dimensions.get('window');
 const cardWidth = width - theme.SIZES.BASE * 2;
 
-const service = new CartService();
 const filterOptions = [
   {value: 'SortByDefault', label: 'Sort By Default'},
   {value: 'SortbyPopularity', label: 'Popularity'},
@@ -55,7 +50,7 @@ type Props = {
   scrollPosition?: number;
 };
 
-const ProductList: FunctionComponent<Props> = ({
+const VendorsList: FunctionComponent<Props> = ({
   sortValue = filterOptions[0],
   navigation,
   route,
@@ -157,7 +152,7 @@ const ProductList: FunctionComponent<Props> = ({
   };
 
   useEffect(() => {
-    console.log('productlist', list);
+    console.log('VendorsList', list);
   }, [list]);
 
   useEffect(() => {
@@ -205,17 +200,6 @@ const ProductList: FunctionComponent<Props> = ({
             imageStyle={{width: 'auto', height: 94}}
             style={{width: width / 2.88, alignSelf: 'center'}}
           />
-          <Button
-            center
-            shadowless
-            color={materialTheme.COLORS.PRIMARY}
-            style={styles.optionsButton}
-            textStyle={[styles.optionsButtonText, {color: 'white'}]}
-            onPress={() => {
-              return service.add(item.id);
-            }}>
-            ADD TO CART
-          </Button>
         </SkeletonContent>
       </Block>
     );
@@ -292,7 +276,7 @@ const ProductList: FunctionComponent<Props> = ({
   );
 };
 
-export default ProductList;
+export default VendorsList;
 
 const styles = StyleSheet.create({
   showMore: {
