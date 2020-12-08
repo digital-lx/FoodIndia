@@ -3,28 +3,19 @@ import React, {FunctionComponent} from 'react';
 import {Text, View} from 'react-native';
 
 import Account from '../screens/Account';
-import Addresses from '../screens/Addresses';
-import BillingDetails from '../screens/BillingDetails';
-import Cart from '../screens/Cart';
 import Categories from '../screens/Categories';
 import Contact from '../screens/Contact';
-import Gallery from '../screens/Gallery';
 import Header from '../common/Header';
 import Home from '../screens/Home';
 import Icon from '../common/Icon';
 import Login from '../screens/Login';
 import MyAccount from '../screens/MyAccount';
-import MyOrders from '../screens/MyOrders';
 import Notification from '../screens/Notifications';
-import OrderDetails from '../screens/OrderDetails';
-import PDetails from '../screens/PDetails';
-import ProductList from '../screens/ProductList';
 import Profile from '../screens/Profile';
 import Register from '../screens/Register';
 import ResetPassword from '../screens/ResetPassword';
 import Search from '../screens/Search';
 import Splash from '../screens/Splash';
-import Wishlist from '../screens/Wishlist';
 import argonTheme from '../constants/Theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -50,21 +41,7 @@ function HomeStack() {
           cardStyle: {backgroundColor: '#F8F9FE'},
         }}
       />
-      <Stack.Screen
-        name="PDetails"
-        component={PDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Product Details"
-              navigation={navigation}
-              scene={scene}
-              back
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
+
       <Stack.Screen
         name="Categories"
         component={Categories}
@@ -116,96 +93,6 @@ function HomeStack() {
           cardStyle: {backgroundColor: '#F8F9FE'},
         }}
       />
-      <Stack.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Shopping Cart"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="ProductList"
-        component={ProductList}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Product List"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Billing"
-        component={BillingDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Billing Details"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Addresses"
-        component={Addresses}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Address"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="OrderDetails"
-        component={OrderDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Order Details"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="MyOrders"
-        component={MyOrders}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="My Orders"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
     </Stack.Navigator>
   );
 }
@@ -216,36 +103,6 @@ function CategoryStack() {
       mode="card"
       headerMode="screen"
       initialRouteName={'Categories'}>
-      <Stack.Screen
-        name="ProductList"
-        component={ProductList}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Product List"
-              navigation={navigation}
-              scene={scene}
-              back
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="PDetails"
-        component={PDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Product Details"
-              navigation={navigation}
-              scene={scene}
-              back
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
       <Stack.Screen
         name="Categories"
         component={Categories}
@@ -272,81 +129,6 @@ function CategoryStack() {
           cardStyle: {backgroundColor: '#F8F9FE'},
         }}
       />
-      <Stack.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Shopping Cart"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Billing"
-        component={BillingDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Billing Details"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Addresses"
-        component={Addresses}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Your Address"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="OrderDetails"
-        component={OrderDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Order Details"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="MyOrders"
-        component={MyOrders}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="My Orders"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
     </Stack.Navigator>
   );
 }
@@ -363,36 +145,7 @@ function AccountStack() {
           headerTransparent: true,
         }}
       />
-      <Stack.Screen
-        name="PDetails"
-        component={PDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Product Details"
-              navigation={navigation}
-              scene={scene}
-              back
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="MyOrders"
-        component={MyOrders}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="My Orders"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
+
       <Stack.Screen
         name="Profile"
         component={MyAccount}
@@ -422,52 +175,6 @@ function AccountStack() {
             />
           ),
           cardStyle: {backgroundColor: '#FFFFFF'},
-        }}
-      />
-
-      <Stack.Screen
-        name="OrderDetails"
-        component={OrderDetails}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Order Details"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Addresses"
-        component={Addresses}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Your Address"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
-      <Stack.Screen
-        name="Wishlist"
-        component={Wishlist}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              title="Your Wishlist"
-              navigation={navigation}
-              scene={scene}
-              back
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
         }}
       />
     </Stack.Navigator>
@@ -584,46 +291,8 @@ const Navigation: FunctionComponent<Props> = (props) => {
       />
       <Stack.Screen name="App" component={AppStack} />
       <Stack.Screen name="Auth" component={AuthStack} />
-      <Stack.Screen
-        name="Gallery"
-        component={Gallery}
-        options={{
-          header: ({navigation, scene}) => (
-            <Header
-              back
-              white
-              transparent
-              title=""
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: {backgroundColor: '#F8F9FE'},
-        }}
-      />
     </Stack.Navigator>
   );
 };
 
 export default Navigation;
-
-// drawerContentOptions={{
-//   activeTintcolor: "white",
-//       inactiveTintColor: "#000",
-//       activeBackgroundColor: "transparent",
-//       itemStyle: {
-//     width: width * 0.75,
-//         backgroundColor: "transparent",
-//         paddingVertical: 16,
-//         paddingHorizonal: 12,
-//         justifyContent: "center",
-//         alignContent: "center",
-//         alignItems: "center",
-//         overflow: "hidden"
-//   },
-//   labelStyle: {
-//     fontSize: 18,
-//         marginLeft: 12,
-//         fontWeight: "normal"
-//   }
-// }}

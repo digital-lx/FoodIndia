@@ -12,7 +12,6 @@ import {
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import CartService from '../Services/CartService';
 import Icon from './Icon';
 import NotificationService from '../Services/notification';
 // import Input from './Input';
@@ -22,7 +21,6 @@ import messaging from '@react-native-firebase/messaging';
 import {withNavigation} from '@react-navigation/compat';
 
 const notification_service = new NotificationService();
-const service = new CartService();
 const {height, width} = Dimensions.get('window');
 const iPhoneX = () =>
   Platform.OS === 'ios' &&
@@ -62,42 +60,6 @@ const BellButton: FunctionComponent<ButtonProps> = ({
         color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
       />
       {count > 0 ? <Block middle style={styles.notify} /> : null}
-    </TouchableOpacity>
-  );
-};
-
-const BasketButton: FunctionComponent<ButtonProps> = ({
-  isWhite,
-  style,
-  navigation,
-}) => {
-  const [count, setCount] = useState(0);
-  const getCount = async () => {
-    const cart = await service.get();
-    setCount(cart !== null ? cart.length : 0);
-  };
-
-  useEffect(() => {
-    getCount();
-  }, []);
-
-  return (
-    <TouchableOpacity
-      style={[styles.button, style]}
-      onPress={() => navigation.navigate('Cart')}>
-      <Icon
-        family="AntDesign"
-        size={18}
-        name="shoppingcart"
-        color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
-      />
-      {count > 0 ? (
-        <Block middle style={styles.basketCount}>
-          <Text size={10} bold color={argonTheme.COLORS.WHITE}>
-            {count}
-          </Text>
-        </Block>
-      ) : null}
     </TouchableOpacity>
   );
 };
@@ -161,11 +123,6 @@ class Header extends React.Component<props> {
           key={'home-search'}
         />,
         <BellButton key="chat-title" navigation={navigation} isWhite={false} />,
-        <BasketButton
-          key="basket-title"
-          navigation={navigation}
-          isWhite={false}
-        />,
       ];
     }
   };
@@ -237,11 +194,15 @@ class Header extends React.Component<props> {
       <Block style={headerStyles}>
         <NavBar
           back={false}
-          title={title === 'Home' ? 'SIAPMART' : title}
+          title={title === 'Home' ? 'FoodIndia' : title}
           style={navbarStyles}
           transparent={transparent}
           right={this.renderRight()}
-          rightStyle={{alignItems: 'center', flex: 1.3}}
+          rightStyle={{
+            alignItems: 'center',
+            flex: 1,
+            justifyContent: 'flex-end',
+          }}
           onLeftPress={this.handleLeftPress}
           left={
             back ? (
@@ -258,8 +219,8 @@ class Header extends React.Component<props> {
               />
             ) : image ? (
               <Image
-                source={require('../assets/logo_sia.png')}
-                style={{width: width / 5, height: 40, resizeMode: 'contain'}}
+                source={require('../assets/logo_food.jpg')}
+                style={{width: width / 6, height: 44, resizeMode: 'contain'}}
               />
             ) : null
           }
@@ -277,12 +238,12 @@ class Header extends React.Component<props> {
 
 const styles = StyleSheet.create({
   button: {
-    padding: 12,
+    padding: 8,
     position: 'relative',
   },
   title: {
     width: '100%',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   navbar: {

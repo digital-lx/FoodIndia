@@ -12,13 +12,11 @@ import {
 import {Block, Button, NavBar, Text, theme} from 'galio-framework';
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-import CartService from '../Services/CartService';
 import Product from '../common/Product';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {WooCommerce} from '../constants/config';
 import argonTheme from '../constants/Theme';
 
-const service = new CartService();
 const {height, width} = Dimensions.get('window');
 
 const RenderProduct = ({item}: any, props: any, navigation: any) => {
@@ -61,7 +59,6 @@ const RenderProduct = ({item}: any, props: any, navigation: any) => {
             if (item.attributes.length > 0) {
               return navigation.navigate('PDetails', {PID: item.id});
             }
-            return service.add(item.id);
           }}>
           {item.attributes && item.attributes.length === 0
             ? 'Add to cart'
