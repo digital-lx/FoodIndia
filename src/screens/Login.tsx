@@ -125,7 +125,7 @@ const Login: FunctionComponent<Props> = ({
               viewPass
               borderless
               color="white"
-              iconColor="white"
+              iconColor={materialTheme.COLORS.PLACEHOLDER}
               placeholder="Password"
               bgColor="transparent"
               onBlur={() => toggleActive('password')}
@@ -137,28 +137,30 @@ const Login: FunctionComponent<Props> = ({
                 active.password ? styles.inputActive : null,
               ]}
             />
-            {err.length > 0 ? (
-              <Text
-                color={materialTheme.COLORS.ERROR}
-                size={theme.SIZES.FONT * 0.75}
-                style={{lineHeight: theme.SIZES.FONT * 2}}>
-                {err}
-              </Text>
-            ) : null}
+            <Block row>
+              {err.length > 0 ? (
+                <Text
+                  color={materialTheme.COLORS.ERROR}
+                  size={theme.SIZES.FONT * 0.75}
+                  style={{lineHeight: theme.SIZES.FONT * 2}}>
+                  {err}
+                </Text>
+              ) : null}
 
-            <Button color="transparent" shadowless>
-              <Text
-                disabled={load}
-                color={theme.COLORS.WHITE}
-                size={theme.SIZES.FONT * 0.75}
-                onPress={() => navigation.navigate('Reset')}
-                style={{
-                  alignSelf: 'flex-end',
-                  lineHeight: theme.SIZES.FONT * 2,
-                }}>
-                Forgot your password?
-              </Text>
-            </Button>
+              <Button color="transparent" shadowless>
+                <Text
+                  disabled={load}
+                  color={theme.COLORS.WHITE}
+                  size={theme.SIZES.FONT * 0.85}
+                  onPress={() => navigation.navigate('Reset')}
+                  style={{
+                    alignSelf: 'flex-end',
+                    lineHeight: theme.SIZES.FONT * 2,
+                  }}>
+                  Forgot your password?
+                </Text>
+              </Button>
+            </Block>
           </Block>
           <Block flex top style={{marginTop: 20}}>
             <Button
@@ -180,8 +182,8 @@ const Login: FunctionComponent<Props> = ({
               <Text
                 center
                 color={theme.COLORS.WHITE}
-                size={theme.SIZES.FONT * 0.75}
-                style={{marginTop: 20}}>
+                size={theme.SIZES.FONT * 0.85}
+                style={{marginTop: 20, width: width / 1.5}}>
                 {"Don't have an account? Sign Up"}
               </Text>
             </Button>
@@ -233,7 +235,7 @@ const styles = StyleSheet.create({
     marginVertical: theme.SIZES.BASE,
     borderWidth: 0,
     minHeight: height % 10,
-    backgroundColor: materialTheme.COLORS.BLOCK,
+    backgroundColor: materialTheme.COLORS.WHITE,
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',

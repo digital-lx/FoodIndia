@@ -17,6 +17,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {WooCommerce} from '../constants/config';
+import sampleData from '../constants/sampleData';
 
 const {width} = Dimensions.get('screen');
 const noImageURL =
@@ -32,28 +33,29 @@ type Props = {
 const Categories: FunctionComponent<Props> = ({
   navigation,
   route,
-  categories = [1, 2, 3, 4, 5, 6, 7, 8],
+  categories = sampleData.categories,
   isLoading = false,
   error = '',
 }) => {
   const [load, setLoad] = useState(isLoading);
   const [categoryList, setCategories] = useState(categories);
 
-  const getData = async () => {
-    setLoad(true);
-    const items = await WooCommerce.get('products/categories', {
-      exclude: [104],
-      per_page: 60,
-    });
-    setLoad(false);
-    setCategories(items);
-  };
+  // const getData = async () => {
+  //   setLoad(true);
+  //   const items = await WooCommerce.get('products/categories', {
+  //     exclude: [104],
+  //     per_page: 60,
+  //   });
+  //   setLoad(false);
+  //   setCategories(items);
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const RenderCategory = ({item}: any, load: boolean, navigation: any) => {
+    console.log('item-c', item);
     return (
       <SkeletonContent
         key={item.id ? `category-${item.title}` : `category-${item}`}
@@ -77,13 +79,13 @@ const Categories: FunctionComponent<Props> = ({
             alignSelf: 'center',
           },
         ]}>
-        {item.id ? (
+        {item.name ? (
           <TouchableWithoutFeedback
             onPress={() => navigation.navigate('ProductList', {CID: item.id})}>
             <Block flex card style={styles.shadow}>
               <ImageBackground
                 source={{
-                  uri: item.image ? item.image.src : noImageURL,
+                  uri: item.image ? item.image : noImageURL,
                 }}
                 style={[
                   styles.imageBlock,
@@ -99,7 +101,7 @@ const Categories: FunctionComponent<Props> = ({
                 }}>
                 <Block style={styles.categoryTitle}>
                   <Text size={11} bold color={theme.COLORS.WHITE}>
-                    {item.name} ({item.count})
+                    {item.name}
                   </Text>
                 </Block>
               </ImageBackground>
@@ -119,7 +121,7 @@ const Categories: FunctionComponent<Props> = ({
         showsVerticalScrollIndicator={true}
         data={categoryList}
         numColumns={2}
-        keyExtractor={(item, index) => `${index}-${item.id}`}
+        keyExtractor={(item, index) => `${index}-${item.name}`}
         renderItem={({item}) => RenderCategory({item}, load, navigation)}
       />
     </Block>

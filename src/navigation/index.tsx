@@ -247,7 +247,7 @@ function AuthStack() {
         options={{
           header: ({navigation, scene}) => (
             <Header
-              iconColor={materialTheme.COLORS.HEADER}
+              iconColor={materialTheme.COLORS.BLACK}
               bgColor={materialTheme.COLORS.DEFAULT}
               transparent={true}
               title="Login"
@@ -264,7 +264,7 @@ function AuthStack() {
         options={{
           header: ({navigation, scene}) => (
             <Header
-              iconColor={materialTheme.COLORS.HEADER}
+              iconColor={materialTheme.COLORS.BLACK}
               bgColor={materialTheme.COLORS.DEFAULT}
               transparent={true}
               back

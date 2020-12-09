@@ -1,7 +1,7 @@
 export default {
   COLORS: {
-    DEFAULT: '#172B4D',
-    PRIMARY: '#5E72E4',
+    DEFAULT: '#fa7348',
+    PRIMARY: '#FACC48',
     SECONDARY: '#F7FAFC',
     LABEL: '#FE2472',
     INFO: '#11CDEF',
@@ -14,8 +14,8 @@ export default {
     INPUT_SUCCESS: '#7BDEB2',
     INPUT_ERROR: '#FCB3A4',
     ACTIVE: '#5E72E4', //same as primary
-    BUTTON_COLOR: '#6699cc', //wtf
-    PLACEHOLDER: '#9FA5AA',
+    BUTTON_COLOR: '#FACC48', //wtf
+    PLACEHOLDER: '#2f2f2f',
     SWITCH_ON: '#5E72E4',
     SWITCH_OFF: '#D4D9DD',
     GRADIENT_START: '#6B24AA',
@@ -30,6 +30,6 @@ export default {
     BLACK: '#000000',
     TWITTER: '#1DA1F2',
     FACEBOOK: '#3B5999',
-    DRIBBBLE: '#EA4C89'
-  }
+    DRIBBBLE: '#EA4C89',
+  },
 };

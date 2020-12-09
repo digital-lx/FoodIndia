@@ -21,6 +21,7 @@ import {Block, Button, NavBar, Text, theme} from 'galio-framework';
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import Banner from '../common/Banner';
+import Data from '../constants/sampleData';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import VirtualizedHorizontalList from '../common/VirtualizedHorizontalList';
 import {WooCommerce} from '../constants/config';
@@ -28,7 +29,6 @@ import argonTheme from '../constants/Theme';
 import sampleData from '../constants/sampleData';
 
 const {height, width} = Dimensions.get('window');
-
 const noImageURL =
   'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';
 //LIST CATEGORIES
@@ -37,11 +37,13 @@ const Category_Item = ({item}: any, props: any, navigation: any) => {
   if (item.count === 0) return null;
   return (
     <Block
+      card
       style={{
         marginRight: theme.SIZES.BASE,
         marginBottom: theme.SIZES.BASE,
         flex: 1,
         alignItems: 'center',
+        paddingVertical: theme.SIZES.BASE / 2,
       }}>
       <SkeletonContent
         duration={1200}
@@ -157,14 +159,19 @@ const Home: FunctionComponent<Props> = ({
 
   return (
     <ScrollView style={styles.parent}>
-      <Banner navigation={navigation} route={route} />
+      <Banner
+        navigation={navigation}
+        route={route}
+        images={Data.banner_top_images}
+        styl={{height: 260}}
+      />
       {/* <View style={styles.secondChild}>
         <Image
           source={{
             uri:
-              'https://siapmart.in/wp-content/uploads/2020/06/fashion-banner3.jpg',
+              'http://www.vyaparexpress.co/wp-content/uploads/2020/08/Side-Banner.jpg',
           }}
-          style={{width: '100%', height: 75}}
+          style={{width: '50%', height: 75}}
         />
       </View> */}
       <View style={styles.verticalContainer}>
@@ -174,7 +181,21 @@ const Home: FunctionComponent<Props> = ({
           navigation={navigation}
         />
       </View>
-      <Banner navigation={navigation} route={route} />
+      <View style={styles.banner_container}>
+        <Text
+          bold
+          size={theme.SIZES.BASE}
+          style={[styles.similarTitle, {paddingLeft: theme.SIZES.BASE * 1.2}]}
+          color={argonTheme.COLORS.TEXT}>
+          Our Prime Customers
+        </Text>
+        <Banner
+          navigation={navigation}
+          route={route}
+          images={Data.banner_middle_images}
+          styl={{height: 220}}
+        />
+      </View>
       {/* {PLACE VENDOR'S LIST - Place it here} */}
     </ScrollView>
   );
@@ -183,6 +204,10 @@ const Home: FunctionComponent<Props> = ({
 export default Home;
 
 const styles = StyleSheet.create({
+  banner_container: {
+    backgroundColor: '#fff',
+    marginBottom: theme.SIZES.base,
+  },
   parent: {
     backgroundColor: 'rgba(220,220,220,0.5)',
     flex: 1,

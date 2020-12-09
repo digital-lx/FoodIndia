@@ -68,7 +68,7 @@ const DrawerItem: FunctionComponent<props> = ({title, navigation}) => {
             color={materialTheme.COLORS.MUTED}
           />
         );
-      case 'Terms and Conditions':
+      case 'Advertise with us':
         return (
           <Icon
             size={16}
@@ -77,7 +77,7 @@ const DrawerItem: FunctionComponent<props> = ({title, navigation}) => {
             color={materialTheme.COLORS.MUTED}
           />
         );
-      case 'FAQ':
+      case 'Upcoming Events':
         return (
           <Icon
             size={18}
@@ -86,7 +86,7 @@ const DrawerItem: FunctionComponent<props> = ({title, navigation}) => {
             color={materialTheme.COLORS.MUTED}
           />
         );
-      case 'Policy':
+      case 'Newspaper':
         return (
           <Icon
             size={18}
@@ -122,15 +122,17 @@ const DrawerItem: FunctionComponent<props> = ({title, navigation}) => {
       case 'Sign Out':
         return logout();
       case 'About Us':
-        return Linking.openURL('https://siapmart.in/about/');
+        return Linking.openURL('http://www.vyaparexpress.co/about-us/');
       case 'Contact':
-        return Linking.openURL('https://siapmart.in/contact/');
-      case 'Terms and Conditions':
-        return Linking.openURL('https://siapmart.in/privacy-policy/');
-      case 'Policy':
-        return Linking.openURL('https://siapmart.in/refund-cancellation/');
-      case 'FAQ':
-        return Linking.openURL('https://siapmart.in/faq/');
+        return Linking.openURL('http://www.vyaparexpress.co/contact-us/');
+      case 'Advertise with us':
+        return Linking.openURL(
+          'http://www.vyaparexpress.co/advertise-with-us/',
+        );
+      case 'Newspaper':
+        return Linking.openURL('http://www.vyaparexpress.co/newspaper/');
+      case 'Upcoming Events':
+        return Linking.openURL('http://www.vyaparexpress.co/upcoming-events/');
       default:
         return navigation.navigate(title);
     }

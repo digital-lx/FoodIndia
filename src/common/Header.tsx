@@ -209,11 +209,11 @@ class Header extends React.Component<props> {
               <Icon
                 name={back ? 'chevron-left' : ''}
                 family="entypo"
-                size={back ? 24 : 24}
+                size={24}
                 onPress={this.handleLeftPress}
                 color={
                   iconColor ||
-                  (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)
+                  (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.BLACK)
                 }
                 style={{marginTop: 2}}
               />
@@ -227,7 +227,7 @@ class Header extends React.Component<props> {
           leftStyle={{paddingVertical: 2, flex: back ? 0.3 : 0}}
           titleStyle={[
             styles.title,
-            {color: argonTheme.COLORS[white ? 'WHITE' : 'HEADER']},
+            {color: argonTheme.COLORS[white ? 'WHITE' : 'BLACK']},
             titleColor && {color: titleColor},
           ]}
         />

@@ -15,24 +15,23 @@ const BannerHeight = 150;
 type Props = {
   navigation?: any;
   route?: any;
+  images: Array<string>;
+  styl?: any;
 };
 
-const images = [
-  'https://siapmart.in/wp-content/uploads/2020/06/slider1.jpg',
-  'https://siapmart.in/wp-content/uploads/2020/06/slider2.jpg',
-  'https://siapmart.in/wp-content/uploads/2020/06/slider3.jpg',
-];
-
-const Banner: FunctionComponent<Props> = ({navigation, route}) => {
+const Banner: FunctionComponent<Props> = ({
+  navigation,
+  route,
+  images,
+  styl = {width: BannerWidth, height: BannerHeight},
+}) => {
   const renderPage = (image: string, index: number) => {
     return (
       <TouchableWithoutFeedback
         key={index}
+        style={{backgroundColor: '#fff'}}
         onPress={() => navigation.navigate('Categories')}>
-        <Image
-          style={{width: BannerWidth, height: BannerHeight}}
-          source={{uri: image}}
-        />
+        <Image style={styl} source={{uri: image}} />
       </TouchableWithoutFeedback>
     );
   };
@@ -41,7 +40,7 @@ const Banner: FunctionComponent<Props> = ({navigation, route}) => {
     <View style={styles.container}>
       <Carousel
         autoplay
-        autoplayTimeout={5000}
+        autoplayTimeout={3000}
         loop
         index={0}
         pageSize={BannerWidth}>
@@ -55,7 +54,6 @@ export default Banner;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
