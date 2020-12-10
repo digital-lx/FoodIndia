@@ -20,6 +20,8 @@ import argonTheme from '../constants/Theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import materialTheme from '../constants/Theme';
+import VendorsList from '../screens/VendorsList';
+import VDetails from '../screens/VendorDetails';
 
 type Props = {};
 
@@ -37,6 +39,37 @@ function HomeStack() {
         options={{
           header: ({navigation, scene}) => (
             <Header image title="Home" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: {backgroundColor: '#F8F9FE'},
+        }}
+      />
+
+      <Stack.Screen
+        name="vendorslist"
+        component={VendorsList}
+        options={{
+          header: ({navigation, scene}) => (
+            <Header
+              image
+              title="Vendors"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: {backgroundColor: '#F8F9FE'},
+        }}
+      />
+      <Stack.Screen
+        name="vendordetails"
+        component={VDetails}
+        options={{
+          header: ({navigation, scene}) => (
+            <Header
+              image
+              title="Vendor Details"
+              navigation={navigation}
+              scene={scene}
+            />
           ),
           cardStyle: {backgroundColor: '#F8F9FE'},
         }}
@@ -119,6 +152,37 @@ function CategoryStack() {
         }}
       />
 
+      <Stack.Screen
+        name="vendorslist"
+        component={VendorsList}
+        options={{
+          header: ({navigation, scene}) => (
+            <Header
+              image
+              title="Vendors"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: {backgroundColor: '#F8F9FE'},
+        }}
+      />
+
+      <Stack.Screen
+        name="vendordetails"
+        component={VDetails}
+        options={{
+          header: ({navigation, scene}) => (
+            <Header
+              image
+              title="Vendor Details"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: {backgroundColor: '#F8F9FE'},
+        }}
+      />
       <Stack.Screen
         name="Search"
         component={Search}

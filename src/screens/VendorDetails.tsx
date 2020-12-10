@@ -11,6 +11,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  View,
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -19,14 +20,10 @@ import {
 import {Block, Button, Text, theme} from 'galio-framework';
 import {HeaderHeight, iPhoneX} from '../constants/utils';
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {WooCommerce, logoURL} from '../constants/config';
+import Colors from '../constants/Theme';
 
-import AnimatedToggle from '../common/AnimatedToggle';
-import IconExtra from '../common/Icon';
-import Select from '../common/Select';
-import SkeletonContent from 'react-native-skeleton-content-nonexpo';
-import VirtualizedHorizontalList from '../common/VirtualizedHorizontalList';
 import materialTheme from '../constants/Theme';
+import {BaseRouter} from '@react-navigation/native';
 
 // import { WebView } from 'react-native-webview';
 
@@ -35,7 +32,7 @@ const {height, width} = Dimensions.get('window');
 type Props = {
   navigation?: any;
   route?: any;
-  data?: any;
+  vendor: any;
   isLoading?: boolean;
   error?: string;
   scrollX?: any;
@@ -52,125 +49,142 @@ const filterOptions = [
   {value: '6', label: '6'},
 ];
 
-const VDetails: FunctionComponent<Props> = ({
-  navigation,
-  route,
-  data = null,
-  isLoading = false,
-  error,
-  scrollX = new Animated.Value(0),
-  size = null,
-  qty = filterOptions[0],
-  saved = false,
-}) => {
-  const [vendor, setVendor] = useState(data);
-  const [load, setLoad] = useState(isLoading);
-  const [scrollhorizontal, setScrollHorizontal] = useState(scrollX);
-  const [selectedSize, setSelectedSize] = useState(size);
-  const [quantity, setQuantity] = useState(qty);
-  const [wishlist, setWishlist] = useState(saved);
-  const getData = async () => {
-    setLoad(true);
-    setLoad(false);
-    setVendor([]);
-  };
+const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
+  const noImageURL =
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png';
 
+  useEffect(() => {
+    console.log(route.params.vendor);
+  });
   return (
-    <Block flex style={styles.product}>
-      <SkeletonContent
-        duration={1000}
-        animationDirection="horizontalLeft"
-        containerStyle={{
-          flex: 1,
-          width: width,
-          alignItems: 'center',
-          marginTop: theme.SIZES.BASE * 5,
-          backgroundColor: theme.COLORS.WHITE,
-        }}
-        isLoading={load}
-        layout={[
-          {
-            key: 'galleryID',
-            width: '90%',
-            height: 250,
-            marginTop: theme.SIZES.BASE * 2,
-          },
-        ]}>
-        <Block flex style={{position: 'relative'}}></Block>
-      </SkeletonContent>
-      <SkeletonContent
-        duration={1000}
-        animationDirection="horizontalLeft"
-        containerStyle={{
-          flex: 1,
-          width: width,
-          paddingTop: theme.SIZES.BASE,
-          backgroundColor: theme.COLORS.WHITE,
-        }}
-        isLoading={load}
-        layout={[
-          {
-            key: 'nameID',
-            width: '70%',
-            height: 25,
-            marginBottom: theme.SIZES.BASE / 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'textID1',
-            width: '40%',
-            height: 20,
-            marginBottom: theme.SIZES.BASE * 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'textID2',
-            width: '70%',
-            height: 25,
-            marginBottom: theme.SIZES.BASE / 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'textID3',
-            width: '40%',
-            height: 20,
-            marginBottom: theme.SIZES.BASE * 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'textID4',
-            width: '70%',
-            height: 25,
-            marginBottom: theme.SIZES.BASE / 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'textID5',
-            width: '40%',
-            height: 20,
-            marginBottom: theme.SIZES.BASE * 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-          {
-            key: 'button1',
-            width: '60%',
-            height: 44,
-            alignSelf: 'center',
-            marginBottom: theme.SIZES.BASE / 1.5,
-            marginHorizontal: theme.SIZES.BASE,
-          },
-        ]}>
-        <Block flex style={styles.options}>
-          <ScrollView showsVerticalScrollIndicator={true}>
-            <Block
+    <View style={styles.product}>
+      {/* Image view  */}
+      <View style={styles.imageView}>
+        <Image
+          source={{
+            uri:
+              route.params.vendor.data.images[0] != 'N/A'
+                ? route.params.vendor.data.images[0]
+                : noImageURL,
+          }}
+          style={[
+            {
+              width: '100%',
+              height: 114,
+              borderRadius: 10,
+              resizeMode: 'contain',
+            },
+            styles.shadow,
+          ]}
+        />
+      </View>
+      {/* Vendor Detail View  */}
+      <View style={styles.vendorDetailsContainer}>
+        <Text style={{flex: 1, fontSize: 23}}>
+          {route.params.vendor.data.name}
+        </Text>
+        <Text
+          style={{
+            flex: 1,
+            fontSize: 18,
+            color: Colors.COLORS.ICON,
+            textAlign: 'center',
+          }}>
+          {route.params.vendor.data.Address}
+        </Text>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Text style={{fontSize: 18}}>Deals In{'  '}</Text>
+          {route.params.vendor.data.Deals_in.map(
+            (deal: string, index: number) => (
+              <View>
+                <Text style={{fontWeight: 'bold', fontSize: 16}}>
+                  {deal}
+                  {/* if it is the third index, then '.' else ',' */}
+                  <Text style={{fontWeight: 'normal'}}>
+                    {index == route.params.vendor.data.Deals_in.length - 1
+                      ? '.'
+                      : ' , '}
+                  </Text>
+                </Text>
+              </View>
+            ),
+          )}
+        </View>
+        {/* mobile contact  */}
+        {route.params.vendor.data.phone[0] != 'N/A' && (
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text style={{fontSize: 18}}>Mobile Number </Text>
+            {route.params.vendor.data.phone.map(
+              (phone: string, index: number) => (
+                <View>
+                  <Text style={{fontSize: 16,paddingLeft:10,paddingTop:3,}}>
+                    {phone}
+                    {index == route.params.vendor.data.phone.length - 1
+                      ? '.'
+                      : ','}
+                  </Text>
+                </View>
+              ),
+            )}
+          </View>
+        )}
+
+        {/* phone contact  */}
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Text style={{fontSize: 18}}>Telephone Number</Text>
+          </View>
+          <View style={{flex: 1, flexDirection: 'column'}}>
+            {route.params.vendor.data.contacts.map((phone: any) => (
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Text style={{fontSize: 16, marginRight: 10}}>
+                  {phone?.name}
+                </Text>
+                <Text style={{fontSize: 16,paddingTop:2,}}>{phone?.phone_number}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Email  */}
+        {route.params.vendor.data.email != 'N/A' && (
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={{fontSize: 18}}>Email</Text>
+            </View>
+            <View
               style={{
-                paddingHorizontal: theme.SIZES.BASE,
-                paddingTop: theme.SIZES.BASE * 2,
-              }}></Block>
-          </ScrollView>
-        </Block>
-      </SkeletonContent>
-    </Block>
+                flex: 1,
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+              }}>
+              <Text style={{fontSize: 16, flex: 1}}>
+                {route.params.vendor.data.email}
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {/* Website */}
+        {route.params.vendor.data.website != 'N/A' && (
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={{fontSize: 18}}>Website</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+              }}>
+              <Text style={{fontSize: 16, flex: 1}}>
+                {route.params.vendor.data.website}
+              </Text>
+            </View>
+          </View>
+        )}
+      </View>
+    </View>
   );
 };
 
@@ -178,110 +192,25 @@ export default VDetails;
 
 const styles = StyleSheet.create({
   product: {
-    marginTop: Platform.OS === 'android' ? -HeaderHeight : 0,
+    flex: 1,
+    flexDirection: 'column',
   },
-  options: {
-    position: 'relative',
-    marginHorizontal: theme.SIZES.BASE,
-    marginTop: -theme.SIZES.BASE * 2,
-    marginBottom: theme.SIZES.BASE,
-    borderTopLeftRadius: 13,
-    borderTopRightRadius: 13,
-    backgroundColor: theme.COLORS.WHITE,
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 0},
-    shadowRadius: 8,
-    shadowOpacity: 0.2,
-  },
-  galleryImage: {
-    width: width,
-    height: 'auto',
-  },
-  dots: {
-    height: theme.SIZES.BASE / 2,
-    margin: theme.SIZES.BASE / 2,
-    borderRadius: 4,
-    backgroundColor: 'white',
-  },
-  dotsContainer: {
-    position: 'absolute',
-    bottom: theme.SIZES.BASE,
-    left: 0,
-    right: 0,
-    // bottom: height / 10,
-  },
-  addToCart: {
-    width: width - theme.SIZES.BASE * 4,
-    marginTop: theme.SIZES.BASE,
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: {width: 0, height: 4},
-    shadowRadius: 8,
-    shadowOpacity: 1,
-    elevation: 0,
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    marginBottom: theme.SIZES.BASE,
-    marginRight: 8,
-  },
-  chat: {
-    width: 56,
-    height: 56,
-    padding: 20,
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: {width: 0, height: 4},
-    shadowRadius: 8,
-    shadowOpacity: 1,
-  },
-  chatContainer: {
-    top: -28,
-    right: theme.SIZES.BASE,
-    zIndex: 2,
-    position: 'absolute',
-  },
-  size: {
-    height: theme.SIZES.BASE * 3,
-    width: (width - theme.SIZES.BASE * 2) / 3,
-    borderBottomWidth: 0.5,
-    borderBottomColor: materialTheme.COLORS.BORDER_COLOR,
-    overflow: 'hidden',
-  },
-  sizeButton: {
-    height: theme.SIZES.BASE * 3,
-    width: '100%',
+  imageView: {
+    flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  active: {
-    backgroundColor: materialTheme.COLORS.BUTTON_COLOR,
-  },
-  roundTopLeft: {
-    borderTopLeftRadius: 4,
-    borderRightColor: materialTheme.COLORS.BORDER_COLOR,
-    borderRightWidth: 0.5,
-  },
-  roundBottomLeft: {
-    borderBottomLeftRadius: 4,
-    borderRightColor: materialTheme.COLORS.BORDER_COLOR,
-    borderRightWidth: 0.5,
-    borderBottomWidth: 0,
-  },
-  roundTopRight: {
-    borderTopRightRadius: 4,
-    borderLeftColor: materialTheme.COLORS.BORDER_COLOR,
-    borderLeftWidth: 0.5,
-  },
-  roundBottomRight: {
-    borderBottomRightRadius: 4,
-    borderLeftColor: materialTheme.COLORS.BORDER_COLOR,
-    borderLeftWidth: 0.5,
-    borderBottomWidth: 0,
-  },
-  icon: {
-    paddingHorizontal: 10,
-    justifyContent: 'center',
+  vendorDetailsContainer: {
+    flex: 0.7,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    padding: 5,
+  },
+  shadow: {
+    shadowColor: '#8898AA',
+    shadowOffset: {width: 0, height: 1},
+    shadowRadius: 6,
+    shadowOpacity: 0.7,
+    elevation: 5,
   },
 });

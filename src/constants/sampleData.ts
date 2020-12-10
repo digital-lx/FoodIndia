@@ -69,14 +69,14 @@ export default {
         Address: `H819, Ginnory Road, Ali Bazar, BHOPAL-462001`,
         Deals_in: ['Sugar', 'Maida', 'Wheat', 'Atta', 'Poha', 'Edible Oil '],
         images: ['N/A'],
-        phone: ['0755-2532405'],
+        phone: ['0755-2532405','0755-2532405'],
         contacts: [
           {
             phone_number: '9300047518',
           },
         ],
-        email: 'N/A',
-        website: 'N/A',
+        email: 'asnan@gmail.com',
+        website: 'www.asnan.com',
       },
     },
     {

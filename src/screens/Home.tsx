@@ -28,6 +28,7 @@ import {WooCommerce} from '../constants/config';
 import argonTheme from '../constants/Theme';
 import sampleData from '../constants/sampleData';
 import Vendor from '../common/Vendor';
+import VendorsList from './VendorsList';
 
 const {height, width} = Dimensions.get('window');
 const noImageURL =
@@ -198,45 +199,10 @@ const Home: FunctionComponent<Props> = ({
         />
       </View>
       {/* {PLACE VENDOR'S LIST - Place it here} */}
-
-      <FlatList
-        data={sampleData.vendors}
-        style={{flex: 1}}
-        ListHeaderComponent={() => (
-          <View style={{backgroundColor: 'white', flex: 1, paddingTop: 18}}>
-            <Text
-              bold
-              size={theme.SIZES.BASE * 1.2}
-              style={[
-                styles.similarTitle,
-                {paddingLeft: theme.SIZES.BASE * 1.2},
-              ]}
-              color={argonTheme.COLORS.TEXT}>
-              Top Vendors
-            </Text>
-          </View>
-        )}
-        ListFooterComponent={() => (
-          <View style={{flex:1,justifyContent:'center',alignItems:'flex-end',marginRight:7}}>
-            <Text style={{color:'#0B94E8',fontSize:theme.SIZES.BASE,textDecorationLine:'underline'}}>View All</Text>
-          </View>
-        )}
-        horizontal={false}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => `${index}-${item.id}`}
-        renderItem={({
-          item: {
-            data: {name, Address, images, Deals_in},
-          },
-        }) => (
-          <Vendor
-            name={name}
-            address={Address}
-            image={images}
-            deals={Deals_in}
-          />
-        )}
-      />
+      <Vendor data={sampleData.vendors} navigation={navigation} route={route} onPress={(id) =>  navigation.navigate('vendordetails',{
+        vendor : sampleData.vendors[id],
+      })}/>
+     
     </ScrollView>
   );
 };
