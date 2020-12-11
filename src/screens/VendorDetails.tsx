@@ -97,7 +97,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           {route.params.vendor.data.Deals_in.map(
             (deal: string, index: number) => (
               <View>
-                <Text style={{fontWeight: 'bold', fontSize: 16}}>
+                <Text style={{fontWeight: 'bold', fontSize: 16,paddingTop:3}}>
                   {deal}
                   {/* if it is the third index, then '.' else ',' */}
                   <Text style={{fontWeight: 'normal'}}>
@@ -117,7 +117,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
             {route.params.vendor.data.phone.map(
               (phone: string, index: number) => (
                 <View>
-                  <Text style={{fontSize: 16,paddingLeft:10,paddingTop:3,}}>
+                  <Text style={{fontSize: 16, paddingLeft: 10, paddingTop: 2}}>
                     {phone}
                     {index == route.params.vendor.data.phone.length - 1
                       ? '.'
@@ -131,58 +131,66 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
 
         {/* phone contact  */}
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{flex: 1, alignItems: 'center'}}>
+          <View style={{flex: 0.4, alignItems: 'center'}}>
             <Text style={{fontSize: 18}}>Telephone Number</Text>
           </View>
-          <View style={{flex: 1, flexDirection: 'column'}}>
+          <View style={{flex: 0.6, flexDirection: 'column'}}>
             {route.params.vendor.data.contacts.map((phone: any) => (
-              <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1, flexDirection: 'row',justifyContent: 'center',}}>
                 <Text style={{fontSize: 16, marginRight: 10}}>
                   {phone?.name}
                 </Text>
-                <Text style={{fontSize: 16,paddingTop:2,}}>{phone?.phone_number}</Text>
+                <Text style={{fontSize: 16}}>
+                  {phone?.phone_number}
+                </Text>
               </View>
             ))}
           </View>
         </View>
 
         {/* Email  */}
-        {route.params.vendor.data.email != 'N/A' && (
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={{fontSize: 18}}>Email</Text>
+
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          {route.params.vendor.data.email != 'N/A' && (
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1, alignItems: 'center'}}>
+                <Text style={{fontSize: 18}}>Email</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                }}>
+                <Text style={{fontSize: 16, flex: 1}}>
+                  {route.params.vendor.data.email}
+                </Text>
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-              }}>
-              <Text style={{fontSize: 16, flex: 1}}>
-                {route.params.vendor.data.email}
-              </Text>
-            </View>
-          </View>
-        )}
+          )}
+        </View>
 
         {/* Website */}
-        {route.params.vendor.data.website != 'N/A' && (
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={{fontSize: 18}}>Website</Text>
+
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          {route.params.vendor.data.website != 'N/A' && (
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1, alignItems: 'center'}}>
+                <Text style={{fontSize: 18}}>Website</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                }}>
+                <Text style={{fontSize: 16, flex: 1}}>
+                  {route.params.vendor.data.website}
+                </Text>
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-              }}>
-              <Text style={{fontSize: 16, flex: 1}}>
-                {route.params.vendor.data.website}
-              </Text>
-            </View>
-          </View>
-        )}
+          )}
+        </View>
       </View>
     </View>
   );

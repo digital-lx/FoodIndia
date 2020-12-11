@@ -106,14 +106,21 @@ const Vendor: FunctionComponent<props> = ({
       data={data}
       style={{flex: 1}}
       ListHeaderComponent={() => (
-        <View style={{backgroundColor: 'white', flex: 1, paddingTop: 18}}>
-          <Text
-            bold
-            size={theme.SIZES.BASE * 1.2}
-            style={[styles.similarTitle, {paddingLeft: theme.SIZES.BASE * 1.2}]}
-            color={argonTheme.COLORS.TEXT}>
-            Top Vendors
-          </Text>
+        <View>
+          {route.name === 'Home' && (
+            <View style={{backgroundColor: 'white', flex: 1, paddingTop: 18}}>
+            <Text
+              bold
+              size={theme.SIZES.BASE * 1.2}
+              style={[
+                styles.similarTitle,
+                {paddingLeft: theme.SIZES.BASE * 1.2},
+              ]}
+              color={argonTheme.COLORS.TEXT}>
+              Top Vendors
+            </Text>
+            </View>
+          )}
         </View>
       )}
       ListFooterComponent={() => (
@@ -131,12 +138,12 @@ const Vendor: FunctionComponent<props> = ({
               flex: 1,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginRight: 7,
+              marginRight: 10,
             }}>
             <Text
               style={{
                 color: '#0B94E8',
-                fontSize: theme.SIZES.BASE,
+                fontSize: theme.SIZES.BASE*1.2,
                 textDecorationLine: 'underline',
               }}>
               {route.name === 'Home' ? 'View All' : 'Load More'}
