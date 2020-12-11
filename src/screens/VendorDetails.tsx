@@ -74,7 +74,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           navigation={navigation}
           route={route}
           images={Data.banner_top_images}
-          styl={{height: 150, marginTop: 5}}
+          styl={{height: 150}}
         />
         {/* Image name address Card */}
         <CustomCard>
@@ -153,7 +153,9 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           {/* mobile contact  */}
           {route.params.vendor.data.phone[0] != 'N/A' && (
             <View style={{flex: 1, flexDirection: 'column'}}>
-              <Text style={[base.text_small,{fontWeight:'bold',fontFamily:'baddest'}]}>Mobile Number </Text>
+              <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
+                Mobile Number{' '}
+              </Text>
               {route.params.vendor.data.phone.map(
                 (phone: string, index: number) => (
                   <View>
@@ -176,7 +178,9 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           {/* phone contact  */}
           <View style={{flex: 1, flexDirection: 'column'}}>
             <View style={{flex: 0.4}}>
-              <Text style={[base.text_small,{fontWeight:'bold'}]}>Telephone Number</Text>
+              <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
+                Telephone Number
+              </Text>
             </View>
             <View style={{flex: 0.6, flexDirection: 'column'}}>
               {route.params.vendor.data.contacts.map((phone: any) => (
@@ -200,7 +204,9 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
             {route.params.vendor.data.email != 'N/A' && (
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1}}>
-                  <Text style={[base.text_small,{fontWeight:'bold'}]}>Email</Text>
+                  <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
+                    Email
+                  </Text>
                 </View>
                 <View
                   style={{
@@ -222,7 +228,9 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
             {route.params.vendor.data.website != 'N/A' && (
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1}}>
-                  <Text style={[base.text_small,{fontWeight:'bold'}]}>Website</Text>
+                  <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
+                    Website
+                  </Text>
                 </View>
                 <View
                   style={{

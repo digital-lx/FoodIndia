@@ -28,7 +28,7 @@ export default CustomCard;
 
 const styles = StyleSheet.create({
   card: {
-      flex:1,
+    flex: 1,
     flexDirection: 'column',
     paddingHorizontal: theme.SIZES.BASE / 2,
     paddingVertical: theme.SIZES.BASE / 3,
