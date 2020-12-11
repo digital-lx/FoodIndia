@@ -27,6 +27,8 @@ import VirtualizedHorizontalList from '../common/VirtualizedHorizontalList';
 import {WooCommerce} from '../constants/config';
 import argonTheme from '../constants/Theme';
 import sampleData from '../constants/sampleData';
+import Vendor from '../common/Vendor';
+import VendorsList from './VendorsList';
 
 const {height, width} = Dimensions.get('window');
 const noImageURL =
@@ -197,6 +199,10 @@ const Home: FunctionComponent<Props> = ({
         />
       </View>
       {/* {PLACE VENDOR'S LIST - Place it here} */}
+      <Vendor data={sampleData.vendors} navigation={navigation} route={route} onPress={(id) =>  navigation.navigate('vendordetails',{
+        vendor : sampleData.vendors[id],
+      })}/>
+     
     </ScrollView>
   );
 };
