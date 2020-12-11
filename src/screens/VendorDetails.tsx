@@ -125,7 +125,13 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
         </CustomCard>
         {/* Vendor Product View  */}
         <CustomCard title="Deals In">
-          <View style={{flex: 1, flexDirection: 'row',paddingTop:5,paddingLeft:10}}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              paddingTop: 5,
+              paddingLeft: 10,
+            }}>
             {route.params.vendor.data.Deals_in.map(
               (deal: string, index: number) => (
                 <View style={{}}>
@@ -151,27 +157,29 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
         <CustomCard title="Contact Info">
           {/* mobile contact  */}
           {route.params.vendor.data.phone[0] != 'N/A' && (
-            <View style={{flex: 1, flexDirection: 'column',padding:10}}>
+            <View style={{flex: 1, flexDirection: 'column', padding: 10}}>
               <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
-                Mobile Number{' '}
+                {`\u2022 `}Mobile Number
               </Text>
-              <View style={{paddingTop:7}}>
-              {route.params.vendor.data.phone.map(
-                (phone: string, index: number) => (
-                  <View >
-                    <Text
-                      style={[
-                        base.text_small,
-                        {paddingLeft: 10, paddingTop: 2},
-                      ]}>
-                      {phone}
-                      {index == route.params.vendor.data.phone.length - 1
-                        ? '.'
-                        : ','}
-                    </Text>
-                  </View>
-                ),
-              )}
+              <View
+                style={{
+                  paddingTop: 7,
+                  paddingLeft: 20,
+                  flex: 1,
+                  flexDirection: 'row',
+                }}>
+                {route.params.vendor.data.phone.map(
+                  (phone: string, index: number) => (
+                    <View>
+                      <Text style={[base.text_small]}>
+                        {phone}
+                        {index == route.params.vendor.data.phone.length - 1
+                          ? '.'
+                          : ' , '}
+                      </Text>
+                    </View>
+                  ),
+                )}
               </View>
             </View>
           )}
@@ -179,21 +187,29 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           {/* phone contact  */}
           <View style={{flex: 1, flexDirection: 'column'}}>
             <View style={{flex: 0.4}}>
-              <Text style={[base.text_normal, {fontFamily: 'argon',padding:10}]}>
-                Telephone Number
+              <Text
+                style={[base.text_normal, {fontFamily: 'argon', padding: 10}]}>
+                {`\u2022 `}Telephone Number
               </Text>
             </View>
-            <View style={{flex: 0.6, flexDirection: 'column',paddingLeft:5}}>
+            <View
+              style={{
+                flex: 0.6,
+                flexDirection: 'column',
+                paddingLeft: 30,
+              }}>
               {route.params.vendor.data.contacts.map((phone: any) => (
                 <View
                   style={{
                     flex: 1,
                     flexDirection: 'row',
-                    paddingLeft: 5, paddingTop: 2
                   }}>
-                  <Text style={[base.text_small, {marginRight: 10,paddingLeft:5}]}>
-                    {phone?.name}
-                  </Text>
+                  {phone.name != undefined && (
+                    <Text style={[base.text_small, {marginRight: 10}]}>
+                      {phone?.name}
+                    </Text>
+                  )}
+
                   <Text style={base.text_small}>{phone?.phone_number}</Text>
                 </View>
               ))}
@@ -206,8 +222,12 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
             {route.params.vendor.data.email != 'N/A' && (
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1}}>
-                  <Text style={[base.text_normal, {fontFamily: 'argon',padding:10}]}>
-                    Email
+                  <Text
+                    style={[
+                      base.text_normal,
+                      {fontFamily: 'argon', padding: 10},
+                    ]}>
+                    {`\u2022 `}Email
                   </Text>
                 </View>
                 <View
@@ -215,7 +235,8 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
                     flex: 1,
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    paddingLeft: 15, paddingTop: 2
+                    flexDirection:'column',
+                    paddingLeft: 30,
                   }}>
                   <Text style={[base.text_small]}>
                     {route.params.vendor.data.email}
@@ -231,14 +252,17 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
             {route.params.vendor.data.website != 'N/A' && (
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1}}>
-                  <Text style={[base.text_normal, {fontFamily: 'argon',padding:10}]}>
-                    Website
+                  <Text
+                    style={[
+                      base.text_normal,
+                      {fontFamily: 'argon', padding: 10},
+                    ]}>
+                    {`\u2022 `}Website
                   </Text>
                 </View>
                 <View
                   style={{
-                    flex: 1,
-                    paddingLeft: 15, paddingTop: 2
+                    paddingLeft: 30,
                   }}>
                   <Text style={[base.text_small]}>
                     {route.params.vendor.data.website}
