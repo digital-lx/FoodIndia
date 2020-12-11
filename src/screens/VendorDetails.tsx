@@ -11,19 +11,21 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  View,
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 // @ts-ignore
 import {Block, Button, Text, theme} from 'galio-framework';
 import {HeaderHeight, iPhoneX} from '../constants/utils';
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import Colors from '../constants/Theme';
 
-import materialTheme from '../constants/Theme';
 import {BaseRouter} from '@react-navigation/native';
+import Colors from '../constants/Theme';
+// common styles
+import {base} from '../common/styles';
+import materialTheme from '../constants/Theme';
 
 // import { WebView } from 'react-native-webview';
 
@@ -80,24 +82,30 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
       </View>
       {/* Vendor Detail View  */}
       <View style={styles.vendorDetailsContainer}>
-        <Text style={{flex: 1, fontSize: 23}}>
+        <Text style={[base.text_large, {flex: 1}]}>
           {route.params.vendor.data.name}
         </Text>
         <Text
-          style={{
-            flex: 1,
-            fontSize: 18,
-            color: Colors.COLORS.ICON,
-            textAlign: 'center',
-          }}>
+          style={[
+            base.text_normal,
+            {
+              flex: 1,
+              color: Colors.COLORS.ICON,
+              textAlign: 'center',
+            },
+          ]}>
           {route.params.vendor.data.Address}
         </Text>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={{fontSize: 18}}>Deals In{'  '}</Text>
+          <Text style={base.text_normal}>Deals In{'  '}</Text>
           {route.params.vendor.data.Deals_in.map(
             (deal: string, index: number) => (
               <View>
-                <Text style={{fontWeight: 'bold', fontSize: 16,paddingTop:3}}>
+                <Text
+                  style={[
+                    base.text_small,
+                    {fontWeight: 'bold', paddingTop: 3},
+                  ]}>
                   {deal}
                   {/* if it is the third index, then '.' else ',' */}
                   <Text style={{fontWeight: 'normal'}}>
@@ -113,11 +121,12 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
         {/* mobile contact  */}
         {route.params.vendor.data.phone[0] != 'N/A' && (
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text style={{fontSize: 18}}>Mobile Number </Text>
+            <Text style={base.text_normal}>Mobile Number </Text>
             {route.params.vendor.data.phone.map(
               (phone: string, index: number) => (
                 <View>
-                  <Text style={{fontSize: 16, paddingLeft: 10, paddingTop: 2}}>
+                  <Text
+                    style={[base.text_small, {paddingLeft: 10, paddingTop: 2}]}>
                     {phone}
                     {index == route.params.vendor.data.phone.length - 1
                       ? '.'
@@ -132,17 +141,20 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
         {/* phone contact  */}
         <View style={{flex: 1, flexDirection: 'row'}}>
           <View style={{flex: 0.4, alignItems: 'center'}}>
-            <Text style={{fontSize: 18}}>Telephone Number</Text>
+            <Text style={base.text_normal}>Telephone Number</Text>
           </View>
           <View style={{flex: 0.6, flexDirection: 'column'}}>
             {route.params.vendor.data.contacts.map((phone: any) => (
-              <View style={{flex: 1, flexDirection: 'row',justifyContent: 'center',}}>
-                <Text style={{fontSize: 16, marginRight: 10}}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <Text style={[base.text_small, {marginRight: 10}]}>
                   {phone?.name}
                 </Text>
-                <Text style={{fontSize: 16}}>
-                  {phone?.phone_number}
-                </Text>
+                <Text style={base.text_small}>{phone?.phone_number}</Text>
               </View>
             ))}
           </View>
@@ -150,11 +162,11 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
 
         {/* Email  */}
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={styles.Rowcontainer}>
           {route.params.vendor.data.email != 'N/A' && (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={{flex: 1, alignItems: 'center'}}>
-                <Text style={{fontSize: 18}}>Email</Text>
+                <Text style={base.text_normal}>Email</Text>
               </View>
               <View
                 style={{
@@ -162,7 +174,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
                 }}>
-                <Text style={{fontSize: 16, flex: 1}}>
+                <Text style={[base.text_small, {flex: 1}]}>
                   {route.params.vendor.data.email}
                 </Text>
               </View>
@@ -172,11 +184,11 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
 
         {/* Website */}
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={styles.Rowcontainer}>
           {route.params.vendor.data.website != 'N/A' && (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={{flex: 1, alignItems: 'center'}}>
-                <Text style={{fontSize: 18}}>Website</Text>
+                <Text style={base.text_normal}>Website</Text>
               </View>
               <View
                 style={{
@@ -184,7 +196,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
                 }}>
-                <Text style={{fontSize: 16, flex: 1}}>
+                <Text style={[base.text_small, {flex: 1}]}>
                   {route.params.vendor.data.website}
                 </Text>
               </View>
@@ -199,9 +211,14 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
 export default VDetails;
 
 const styles = StyleSheet.create({
+  Rowcontainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   product: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: 'white',
   },
   imageView: {
     flex: 0.3,

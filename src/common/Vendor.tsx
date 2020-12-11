@@ -1,3 +1,6 @@
+// @ts-ignore
+import {Block, Button, NavBar, Text, theme} from 'galio-framework';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 /*TODO:Create Vendor Card
  * VendorCard
  *  - name
@@ -10,16 +13,16 @@ import React, {
   FunctionComponentFactory,
   useEffect,
 } from 'react';
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {height, width} from '../constants/utils';
+
 import Colors from '../constants/Theme';
-import {FlatList} from 'react-native-gesture-handler';
-// @ts-ignore
-import {Block, Button, NavBar, Text, theme} from 'galio-framework';
-import argonTheme from '../constants/Theme';
 // sample data
 import Data from '../constants/sampleData';
+import {FlatList} from 'react-native-gesture-handler';
 import {JsonConfig} from '@notifee/react-native/dist/types/Module';
+import argonTheme from '../constants/Theme';
+// common styles
+import {base} from '../common/styles';
 import {navigate} from '@react-navigation/compat/lib/typescript/src/NavigationActions';
 
 type itemprops = {
@@ -42,7 +45,10 @@ export const VendorCard: FunctionComponent<itemprops> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={() => onPress(index)}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      style={styles.touchable}
+      onPress={() => onPress(index)}>
       <View style={styles.parent}>
         {/* Image View  */}
         <View style={styles.Image}>
@@ -62,16 +68,53 @@ export const VendorCard: FunctionComponent<itemprops> = ({
         </View>
         {/* Vendor Detail View  */}
         <View style={styles.vendorDetailsContainer}>
-          <Text style={{flex: 0.1, fontSize: 20}}>{name}</Text>
-          <Text style={{fontSize: 13, flex: 0.7, color: Colors.COLORS.ICON}}>
+          <Text
+            style={[
+              {
+                fontSize: base.text_normal.fontSize - 2,
+                fontFamily: base.text_large.fontFamily,
+              },
+              {flex: 0.1},
+            ]}>
+            {name}
+          </Text>
+          <Text
+            style={[
+              base.text_small.fontSize - 2,
+              base.text_small.fontFamily,
+              {flex: 0.7, color: Colors.COLORS.ICON},
+            ]}>
             {address}
           </Text>
-          <View style={{flex: 0.2, flexDirection: 'row'}}>
-            <Text>Deals In{'  '}</Text>
+          <View
+            style={{
+              flex: 0.2,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={[
+                {
+                  fontSize: base.text_small.fontSize - 2,
+                  fontFamily: base.text_normal.fontFamily,
+                },
+              ]}>
+              Deals In -{'  '}
+            </Text>
             {deals.map((deal, index) => (
-              <View>
+              <View
+                style={{
+                  paddingTop: 2,
+                }}>
                 {index < 3 && (
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>
+                  <Text
+                    style={[
+                      {
+                        fontSize: base.text_small.fontSize - 2,
+                        fontFamily: base.text_large.fontFamily,
+                      },
+                    ]}>
                     {deal}
                     {/* if it is the third index, then '.' else ',' */}
                     <Text style={{fontWeight: 'normal'}}>
@@ -104,21 +147,22 @@ const Vendor: FunctionComponent<props> = ({
   return (
     <FlatList
       data={data}
-      style={{flex: 1}}
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        paddingBottom: theme.SIZES.BASE,
+      }}
       ListHeaderComponent={() => (
         <View>
           {route.name === 'Home' && (
             <View style={{backgroundColor: 'white', flex: 1, paddingTop: 18}}>
-            <Text
-              bold
-              size={theme.SIZES.BASE * 1.2}
-              style={[
-                styles.similarTitle,
-                {paddingLeft: theme.SIZES.BASE * 1.2},
-              ]}
-              color={argonTheme.COLORS.TEXT}>
-              Top Vendors
-            </Text>
+              <Text
+                bold
+                size={theme.SIZES.BASE * 1.1}
+                style={[base.text_large, {paddingLeft: theme.SIZES.BASE * 1.1}]}
+                color={argonTheme.COLORS.TEXT}>
+                Top Vendors
+              </Text>
             </View>
           )}
         </View>
@@ -143,10 +187,10 @@ const Vendor: FunctionComponent<props> = ({
             <Text
               style={{
                 color: '#0B94E8',
-                fontSize: theme.SIZES.BASE*1.2,
+                fontSize: theme.SIZES.BASE * 1.1,
                 textDecorationLine: 'underline',
               }}>
-              {route.name === 'Home' ? 'View All' : 'Load More'}
+              {route.name === 'Home' ? 'View all' : 'Load more'}
             </Text>
           </View>
         </TouchableOpacity>
@@ -171,15 +215,18 @@ const Vendor: FunctionComponent<props> = ({
 export default Vendor;
 
 const styles = StyleSheet.create({
-  parent: {
+  touchable: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderWidth: 8,
     margin: width * 0.02,
     borderRadius: 10,
     borderColor: 'white',
-    elevation: 4,
+    elevation: 3,
+    backgroundColor: 'white',
+  },
+  parent: {
+    flexDirection: 'row',
+    paddingHorizontal: theme.SIZES.BASE,
+    paddingVertical: theme.SIZES.BASE / 1.5,
   },
   Image: {
     flex: 0.3,

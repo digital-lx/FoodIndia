@@ -16,12 +16,12 @@ import Register from '../screens/Register';
 import ResetPassword from '../screens/ResetPassword';
 import Search from '../screens/Search';
 import Splash from '../screens/Splash';
+import VDetails from '../screens/VendorDetails';
+import VendorsList from '../screens/VendorsList';
 import argonTheme from '../constants/Theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import materialTheme from '../constants/Theme';
-import VendorsList from '../screens/VendorsList';
-import VDetails from '../screens/VendorDetails';
 
 type Props = {};
 
@@ -65,6 +65,7 @@ function HomeStack() {
         options={{
           header: ({navigation, scene}) => (
             <Header
+              back
               image
               title="Vendor Details"
               navigation={navigation}
@@ -174,6 +175,7 @@ function CategoryStack() {
         options={{
           header: ({navigation, scene}) => (
             <Header
+              back
               image
               title="Vendor Details"
               navigation={navigation}

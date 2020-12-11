@@ -23,12 +23,13 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import Banner from '../common/Banner';
 import Data from '../constants/sampleData';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
+import Vendor from '../common/Vendor';
+import VendorsList from './VendorsList';
 import VirtualizedHorizontalList from '../common/VirtualizedHorizontalList';
 import {WooCommerce} from '../constants/config';
 import argonTheme from '../constants/Theme';
+import {base} from '../common/styles';
 import sampleData from '../constants/sampleData';
-import Vendor from '../common/Vendor';
-import VendorsList from './VendorsList';
 
 const {height, width} = Dimensions.get('window');
 const noImageURL =
@@ -103,8 +104,8 @@ const RenderCategories: FunctionComponent<listProps> = ({
       }}>
       <Text
         bold
-        size={theme.SIZES.BASE}
-        style={styles.similarTitle}
+        size={theme.SIZES.BASE * 1.1}
+        style={base.text_large}
         color={argonTheme.COLORS.TEXT}>
         Product Categories
       </Text>
@@ -160,7 +161,9 @@ const Home: FunctionComponent<Props> = ({
   }, []);
 
   return (
-    <ScrollView style={styles.parent}>
+    <ScrollView
+      style={styles.parent}
+      contentContainerStyle={{paddingBottom: theme.SIZES.BASE * 2}}>
       <Banner
         navigation={navigation}
         route={route}
@@ -186,8 +189,14 @@ const Home: FunctionComponent<Props> = ({
       <View style={styles.banner_container}>
         <Text
           bold
-          size={theme.SIZES.BASE}
-          style={[styles.similarTitle, {paddingLeft: theme.SIZES.BASE * 1.2}]}
+          size={theme.SIZES.BASE * 1.1}
+          style={[
+            base.text_large,
+            {
+              paddingLeft: theme.SIZES.BASE * 1.2,
+              marginBottom: theme.SIZES.BASE,
+            },
+          ]}
           color={argonTheme.COLORS.TEXT}>
           Our Prime Customers
         </Text>
@@ -199,10 +208,16 @@ const Home: FunctionComponent<Props> = ({
         />
       </View>
       {/* {PLACE VENDOR'S LIST - Place it here} */}
-      <Vendor data={sampleData.vendors} navigation={navigation} route={route} onPress={(id) =>  navigation.navigate('vendordetails',{
-        vendor : sampleData.vendors[id],
-      })}/>
-     
+      <Vendor
+        data={sampleData.vendors}
+        navigation={navigation}
+        route={route}
+        onPress={(id) =>
+          navigation.navigate('vendordetails', {
+            vendor: sampleData.vendors[id],
+          })
+        }
+      />
     </ScrollView>
   );
 };
@@ -212,7 +227,8 @@ export default Home;
 const styles = StyleSheet.create({
   banner_container: {
     backgroundColor: '#fff',
-    marginBottom: theme.SIZES.base,
+    marginBottom: theme.SIZES.BASE,
+    paddingVertical: theme.SIZES.BASE,
   },
   parent: {
     backgroundColor: 'rgba(220,220,220,0.5)',
@@ -229,10 +245,9 @@ const styles = StyleSheet.create({
   },
   verticalContainer: {
     flex: 1,
-    marginTop: 10,
+    marginVertical: 10,
     backgroundColor: '#fff',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
   optionsButtonText: {
     fontFamily: 'open-sans-bold',

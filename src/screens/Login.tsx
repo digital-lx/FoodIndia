@@ -165,7 +165,7 @@ const Login: FunctionComponent<Props> = ({
           <Block flex top style={{marginTop: 20}}>
             <Button
               disabled={load}
-              color={materialTheme.COLORS.BUTTON_COLOR}
+              color={materialTheme.COLORS.PRIMARY}
               style={{height: 48}}
               onPress={() => handleLogin()}>
               {!load ? (

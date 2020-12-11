@@ -113,8 +113,8 @@ class Header extends React.Component<props> {
     if (
       title === 'Home' ||
       title === 'Categories' ||
-      title === 'Product List' ||
-      title === 'Product Details'
+      title === 'Vendors' ||
+      title === 'Vendor Details'
     ) {
       return [
         <SearchButton
@@ -243,8 +243,8 @@ const styles = StyleSheet.create({
   },
   title: {
     width: '100%',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'fontawesome-webfont',
   },
   navbar: {
     // paddingVertical: 0,
