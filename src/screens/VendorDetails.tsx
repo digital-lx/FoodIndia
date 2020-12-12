@@ -1,6 +1,12 @@
 /* TODO:
  * - Show all the information od the vendor
  * - Name ,email etc.
+ * Create the Banner
+ * Title for Each Card
+ * Card containing the image name, Address
+ * Card containing the Products
+ * Card containing the contacts info
+ *
  * */
 
 import {
@@ -20,9 +26,11 @@ import {
 import {Block, Button, Text, theme} from 'galio-framework';
 import {HeaderHeight, iPhoneX} from '../constants/utils';
 import React, {FunctionComponent, useEffect, useState} from 'react';
-
+import Data from '../constants/sampleData';
+import Banner from '../common/Banner';
 import {BaseRouter} from '@react-navigation/native';
 import Colors from '../constants/Theme';
+import CustomCard from '../common/CustomCard';
 // common styles
 import {base} from '../common/styles';
 import materialTheme from '../constants/Theme';
@@ -55,156 +63,218 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
   const noImageURL =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png';
 
-  useEffect(() => {
-    console.log(route.params.vendor);
-  });
+  // useEffect(() => {
+  //   console.log(route.params.vendor);
+  // });
   return (
-    <View style={styles.product}>
-      {/* Image view  */}
-      <View style={styles.imageView}>
-        <Image
-          source={{
-            uri:
-              route.params.vendor.data.images[0] != 'N/A'
-                ? route.params.vendor.data.images[0]
-                : noImageURL,
-          }}
-          style={[
-            {
-              width: '100%',
-              height: 114,
-              borderRadius: 10,
-              resizeMode: 'contain',
-            },
-            styles.shadow,
-          ]}
+    <ScrollView>
+      <View style={styles.product}>
+        {/* banner View  */}
+        <Banner
+          navigation={navigation}
+          route={route}
+          images={Data.banner_top_images}
+          styl={{height: 150}}
         />
-      </View>
-      {/* Vendor Detail View  */}
-      <View style={styles.vendorDetailsContainer}>
-        <Text style={[base.text_large, {flex: 1}]}>
-          {route.params.vendor.data.name}
-        </Text>
-        <Text
-          style={[
-            base.text_normal,
-            {
-              flex: 1,
-              color: Colors.COLORS.ICON,
-              textAlign: 'center',
-            },
-          ]}>
-          {route.params.vendor.data.Address}
-        </Text>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={base.text_normal}>Deals In{'  '}</Text>
-          {route.params.vendor.data.Deals_in.map(
-            (deal: string, index: number) => (
-              <View>
-                <Text
-                  style={[
-                    base.text_small,
-                    {fontWeight: 'bold', paddingTop: 3},
-                  ]}>
-                  {deal}
-                  {/* if it is the third index, then '.' else ',' */}
-                  <Text style={{fontWeight: 'normal'}}>
-                    {index == route.params.vendor.data.Deals_in.length - 1
-                      ? '.'
-                      : ' , '}
-                  </Text>
+        {/* Image name address Card */}
+        <CustomCard>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={styles.imageView}>
+              <Image
+                source={{
+                  uri:
+                    route.params.vendor.data.images[0] != 'N/A'
+                      ? route.params.vendor.data.images[0]
+                      : noImageURL,
+                }}
+                style={[
+                  {
+                    width: '100%',
+                    height: 114,
+                    borderRadius: 10,
+                    resizeMode: 'contain',
+                  },
+                  styles.shadow,
+                ]}
+              />
+            </View>
+            <View style={{flex: 3, flexDirection: 'column'}}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                }}>
+                <Text style={[base.text_large, {textAlign: 'center'}]}>
+                  {route.params.vendor.data.name}
                 </Text>
               </View>
-            ),
-          )}
-        </View>
-        {/* mobile contact  */}
-        {route.params.vendor.data.phone[0] != 'N/A' && (
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text style={base.text_normal}>Mobile Number </Text>
-            {route.params.vendor.data.phone.map(
-              (phone: string, index: number) => (
-                <View>
+              <Text
+                style={[
+                  base.text_small,
+                  {
+                    flex: 1,
+                    color: Colors.COLORS.ICON,
+                    textAlign: 'center',
+                  },
+                ]}>
+                Address {route.params.vendor.data.Address}
+              </Text>
+            </View>
+          </View>
+        </CustomCard>
+        {/* Vendor Product View  */}
+        <CustomCard title="Deals In">
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              paddingTop: 5,
+              paddingLeft: 10,
+            }}>
+            {route.params.vendor.data.Deals_in.map(
+              (deal: string, index: number) => (
+                <View style={{}}>
                   <Text
-                    style={[base.text_small, {paddingLeft: 10, paddingTop: 2}]}>
-                    {phone}
-                    {index == route.params.vendor.data.phone.length - 1
-                      ? '.'
-                      : ','}
+                    style={[
+                      base.text_small,
+                      {fontWeight: 'bold', paddingTop: 3},
+                    ]}>
+                    {deal}
+                    {/* if it is the third index, then '.' else ',' */}
+                    <Text style={{fontWeight: 'normal'}}>
+                      {index == route.params.vendor.data.Deals_in.length - 1
+                        ? '.'
+                        : ' , '}
+                    </Text>
                   </Text>
                 </View>
               ),
             )}
           </View>
-        )}
+        </CustomCard>
 
-        {/* phone contact  */}
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{flex: 0.4, alignItems: 'center'}}>
-            <Text style={base.text_normal}>Telephone Number</Text>
-          </View>
-          <View style={{flex: 0.6, flexDirection: 'column'}}>
-            {route.params.vendor.data.contacts.map((phone: any) => (
+        <CustomCard title="Contact Info">
+          {/* mobile contact  */}
+          {route.params.vendor.data.phone[0] != 'N/A' && (
+            <View style={{flex: 1, flexDirection: 'column', padding: 10}}>
+              <Text style={[base.text_normal, {fontFamily: 'argon'}]}>
+                {`\u2022 `}Mobile Number
+              </Text>
               <View
                 style={{
+                  paddingTop: 7,
+                  paddingLeft: 20,
                   flex: 1,
                   flexDirection: 'row',
-                  justifyContent: 'center',
                 }}>
-                <Text style={[base.text_small, {marginRight: 10}]}>
-                  {phone?.name}
-                </Text>
-                <Text style={base.text_small}>{phone?.phone_number}</Text>
+                {route.params.vendor.data.phone.map(
+                  (phone: string, index: number) => (
+                    <View>
+                      <Text style={[base.text_small]}>
+                        {phone}
+                        {index == route.params.vendor.data.phone.length - 1
+                          ? '.'
+                          : ' , '}
+                      </Text>
+                    </View>
+                  ),
+                )}
               </View>
-            ))}
+            </View>
+          )}
+
+          {/* phone contact  */}
+          <View style={{flex: 1, flexDirection: 'column'}}>
+            <View style={{flex: 0.4}}>
+              <Text
+                style={[base.text_normal, {fontFamily: 'argon', padding: 10}]}>
+                {`\u2022 `}Telephone Number
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 0.6,
+                flexDirection: 'column',
+                paddingLeft: 30,
+              }}>
+              {route.params.vendor.data.contacts.map((phone: any) => (
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                  }}>
+                  {phone.name != undefined && (
+                    <Text style={[base.text_small, {marginRight: 10}]}>
+                      {phone?.name}
+                    </Text>
+                  )}
+
+                  <Text style={base.text_small}>{phone?.phone_number}</Text>
+                </View>
+              ))}
+            </View>
           </View>
-        </View>
 
-        {/* Email  */}
+          {/* Email  */}
 
-        <View style={styles.Rowcontainer}>
-          {route.params.vendor.data.email != 'N/A' && (
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <View style={{flex: 1, alignItems: 'center'}}>
-                <Text style={base.text_normal}>Email</Text>
+          <View style={styles.Rowcontainer}>
+            {route.params.vendor.data.email != 'N/A' && (
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 1}}>
+                  <Text
+                    style={[
+                      base.text_normal,
+                      {fontFamily: 'argon', padding: 10},
+                    ]}>
+                    {`\u2022 `}Email
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    flexDirection:'column',
+                    paddingLeft: 30,
+                  }}>
+                  <Text style={[base.text_small]}>
+                    {route.params.vendor.data.email}
+                  </Text>
+                </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                }}>
-                <Text style={[base.text_small, {flex: 1}]}>
-                  {route.params.vendor.data.email}
-                </Text>
-              </View>
-            </View>
-          )}
-        </View>
+            )}
+          </View>
 
-        {/* Website */}
+          {/* Website */}
 
-        <View style={styles.Rowcontainer}>
-          {route.params.vendor.data.website != 'N/A' && (
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <View style={{flex: 1, alignItems: 'center'}}>
-                <Text style={base.text_normal}>Website</Text>
+          <View style={styles.Rowcontainer}>
+            {route.params.vendor.data.website != 'N/A' && (
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 1}}>
+                  <Text
+                    style={[
+                      base.text_normal,
+                      {fontFamily: 'argon', padding: 10},
+                    ]}>
+                    {`\u2022 `}Website
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    paddingLeft: 30,
+                  }}>
+                  <Text style={[base.text_small]}>
+                    {route.params.vendor.data.website}
+                  </Text>
+                </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                }}>
-                <Text style={[base.text_small, {flex: 1}]}>
-                  {route.params.vendor.data.website}
-                </Text>
-              </View>
-            </View>
-          )}
-        </View>
+            )}
+          </View>
+        </CustomCard>
+        <View style={styles.vendorDetailsContainer}></View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -217,13 +287,11 @@ const styles = StyleSheet.create({
   },
   product: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: 'white',
   },
   imageView: {
-    flex: 0.3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
   },
   vendorDetailsContainer: {
     flex: 0.7,
