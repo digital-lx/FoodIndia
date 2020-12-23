@@ -105,7 +105,10 @@ const RenderCategories: FunctionComponent<listProps> = ({
       <Text
         bold
         size={theme.SIZES.BASE * 1.1}
-        style={base.text_large}
+        style={[
+          base.text_large,
+          {lineHeight: theme.SIZES.BASE * 2, marginBottom: theme.SIZES.BASE},
+        ]}
         color={argonTheme.COLORS.TEXT}>
         Product Categories
       </Text>
@@ -194,6 +197,7 @@ const Home: FunctionComponent<Props> = ({
             base.text_large,
             {
               paddingLeft: theme.SIZES.BASE * 1.2,
+              lineHeight: theme.SIZES.BASE * 2,
               marginBottom: theme.SIZES.BASE,
             },
           ]}

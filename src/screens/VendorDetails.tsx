@@ -6,7 +6,6 @@
  * Card containing the image name, Address
  * Card containing the Products
  * Card containing the contacts info
- *
  * */
 
 import {
@@ -26,11 +25,12 @@ import {
 import {Block, Button, Text, theme} from 'galio-framework';
 import {HeaderHeight, iPhoneX} from '../constants/utils';
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import Data from '../constants/sampleData';
+
 import Banner from '../common/Banner';
 import {BaseRouter} from '@react-navigation/native';
 import Colors from '../constants/Theme';
 import CustomCard from '../common/CustomCard';
+import Data from '../constants/sampleData';
 // common styles
 import {base} from '../common/styles';
 import materialTheme from '../constants/Theme';
@@ -74,7 +74,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
           navigation={navigation}
           route={route}
           images={Data.banner_top_images}
-          styl={{height: 150}}
+          styl={{height: 260}}
         />
         {/* Image name address Card */}
         <CustomCard>
@@ -235,7 +235,7 @@ const VDetails: FunctionComponent<Props> = ({navigation, route, vendor}) => {
                     flex: 1,
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    flexDirection:'column',
+                    flexDirection: 'column',
                     paddingLeft: 30,
                   }}>
                   <Text style={[base.text_small]}>
